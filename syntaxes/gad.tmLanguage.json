@@ -52,6 +52,7 @@
     },
     "interpolation": {
       "name": "meta.interpolation.gad",
+      "contentName": "meta.embedded.gad",
       "begin": "\\{",
       "end": "\\}",
       "patterns": [
@@ -62,9 +63,14 @@
           "include": "$self"
         }
       ],
-      "captures": {
+      "beginCaptures": {
         "0": {
-          "name": "punctuation.section.embedded.gad"
+          "name": "punctuation.section.embedded.begin.gad"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.end.gad"
         }
       }
     },
