@@ -27,13 +27,25 @@
       "patterns": [
         {
           "name": "comment.block.documentation.gad",
+          "contentName": "meta.embedded.block.markdown",
           "begin": "/\\*\\*\\*",
-          "end": "^\\s*\\*\\*\\*/\\s*$"
+          "end": "^\\s*\\*\\*\\*/\\s*$",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
         },
         {
           "name": "comment.block.documentation.gad",
+          "contentName": "meta.embedded.block.markdown",
           "begin": "/\\*\\*",
-          "end": "^\\s*\\*\\*/\\s*$"
+          "end": "^\\s*\\*\\*/\\s*$",
+          "patterns": [
+            {
+              "include": "text.html.markdown"
+            }
+          ]
         },
         {
           "name": "comment.line.documentation.gad",
