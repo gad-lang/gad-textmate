@@ -6,8 +6,11 @@
     { "include": "#comment" },
     { "include": "#doctype" },
     { "include": "#codeblock" },
+    { "include": "#codeline" },
     { "include": "#slot" },
+    { "include": "#test" },
     { "include": "#keyword" },
+    { "include": "#call" },
     { "include": "#component" },
     { "include": "#pipe" },
     { "include": "#html" },
@@ -16,8 +19,24 @@
   ],
   "repository": {
     "comment": {
-      "match": "^\\s*//.*$",
-      "name": "comment.line.double-slash.gadx"
+      "patterns": [
+        {
+          "begin": "^\\s*/\\*\\*(?!/)",
+          "end": "\\*\\*?/",
+          "name": "comment.block.documentation.gadx",
+          "contentName": "meta.embedded.block.markdown",
+          "patterns": [{ "include": "text.html.markdown" }]
+        },
+        {
+          "begin": "^\\s*/\\*",
+          "end": "\\*/",
+          "name": "comment.block.gadx"
+        },
+        {
+          "match": "^\\s*//.*$",
+          "name": "comment.line.double-slash.gadx"
+        }
+      ]
     },
     "doctype": {
       "match": "^\\s*(!!!).*$",
@@ -30,6 +49,16 @@
       "endCaptures": { "1": { "name": "punctuation.definition.codeblock.gadx" } },
       "name": "meta.embedded.block.gad",
       "patterns": [{ "include": "source.gad" }]
+    },
+    "codeline": {
+      "begin": "^(\\s*)(~)(?!~)",
+      "beginCaptures": { "2": { "name": "punctuation.definition.code.gadx" } },
+      "end": "$",
+      "name": "meta.embedded.line.gad",
+      "patterns": [
+        { "include": "#interpolation" },
+        { "include": "source.gad" }
+      ]
     },
     "interpolation": {
       "begin": "\\{=?",
@@ -59,6 +88,21 @@
         { "match": "[^{\"]+", "name": "string.quoted.double.gadx" }
       ]
     },
+    "test": {
+      "begin": "^(\\s*)(@test)\\b",
+      "beginCaptures": { "2": { "name": "keyword.control.gadx" } },
+      "end": "$",
+      "patterns": [
+        { "match": "\\b[A-Za-z_]\\w*", "name": "entity.name.function.gadx" },
+        {
+          "begin": "\"",
+          "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.gadx" } },
+          "end": "\"",
+          "endCaptures": { "0": { "name": "punctuation.definition.string.end.gadx" } },
+          "name": "string.quoted.double.gadx"
+        }
+      ]
+    },
     "keyword": {
       "begin": "^(\\s*)(@[A-Za-z_]\\w*)",
       "beginCaptures": { "2": { "name": "keyword.control.gadx" } },
@@ -68,9 +112,22 @@
         { "include": "source.gad" }
       ]
     },
+    "call": {
+      "begin": "^(\\s*)(!)(?=\\s)",
+      "beginCaptures": { "2": { "name": "keyword.operator.call.gadx" } },
+      "end": "$",
+      "name": "meta.embedded.line.gad",
+      "patterns": [
+        { "include": "#interpolation" },
+        { "include": "source.gad" }
+      ]
+    },
     "component": {
-      "begin": "^(\\s*)(\\+[A-Za-z_][\\w.]*)",
-      "beginCaptures": { "2": { "name": "entity.name.function.gadx" } },
+      "begin": "^(\\s*)(\\+)\\s*([A-Za-z_][\\w.]*)?",
+      "beginCaptures": {
+        "2": { "name": "keyword.operator.component.gadx" },
+        "3": { "name": "entity.name.function.gadx" }
+      },
       "end": "$",
       "patterns": [
         { "include": "#interpolation" },
@@ -78,7 +135,7 @@
       ]
     },
     "pipe": {
-      "begin": "^(\\s*)(\\|)",
+      "begin": "^(\\s*)(\\|>?)",
       "beginCaptures": { "2": { "name": "punctuation.definition.text.gadx" } },
       "end": "$",
       "name": "string.unquoted.text.gadx",
