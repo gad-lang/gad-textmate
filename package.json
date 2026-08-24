@@ -1,45 +1,71 @@
 {
-  "name": "@gad-lang/textmate",
-  "version": "0.1.0",
-  "description": "Gad language TextMate bundle: grammars (.gad / .gadt / .gadx), language configuration and config JSON schemas. Shared by the VS Code and IntelliJ plugins.",
-  "publisher": "gad-lang",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gad-lang/gad-textmate.git"
-  },
-  "files": [
-    "syntaxes",
-    "schemas",
-    "language-configuration.json",
-    "gadx-language-configuration.json"
-  ],
-  "contributes": {
-    "languages": [
-      {
-        "id": "gad",
-        "aliases": ["Gad", "gad"],
-        "extensions": [".gad", ".gadt"],
-        "configuration": "./language-configuration.json"
-      },
-      {
-        "id": "gadx",
-        "aliases": ["Gadx", "gadx"],
-        "extensions": [".gadx"],
-        "configuration": "./gadx-language-configuration.json"
-      }
+    "name": "@gad-lang/textmate",
+    "version": "0.1.0",
+    "description": "Gad language TextMate bundle: grammars (.gad / .gadt / .gadx), language configuration and config JSON schemas. Shared by the VS Code and IntelliJ plugins.",
+    "publisher": "gad-lang",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gad-lang/gad-textmate.git"
+    },
+    "files": [
+        "syntaxes",
+        "schemas",
+        "language-configuration.json",
+        "gadx-language-configuration.json"
     ],
-    "grammars": [
-      {
-        "language": "gad",
-        "scopeName": "source.gad",
-        "path": "./syntaxes/gad.tmLanguage.json"
-      },
-      {
-        "language": "gadx",
-        "scopeName": "source.gadx",
-        "path": "./syntaxes/gadx.tmLanguage.json"
-      }
-    ]
-  }
+    "contributes": {
+        "languages": [
+            {
+                "id": "gad",
+                "aliases": [
+                    "Gad",
+                    "gad"
+                ],
+                "extensions": [
+                    ".gad"
+                ],
+                "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "gadt",
+                "aliases": [
+                    "Gad Template",
+                    "gadt"
+                ],
+                "extensions": [
+                    ".gadt"
+                ],
+                "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "gadx",
+                "aliases": [
+                    "Gadx",
+                    "gadx"
+                ],
+                "extensions": [
+                    ".gadx"
+                ],
+                "configuration": "./gadx-language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "gad",
+                "scopeName": "source.gad",
+                "path": "./syntaxes/gad.tmLanguage.json"
+            },
+            {
+                "language": "gadt",
+                "scopeName": "source.gadt",
+                "path": "./syntaxes/gadt.tmLanguage.json"
+            },
+            {
+                "language": "gadx",
+                "scopeName": "source.gadx",
+                "path": "./syntaxes/gadx.tmLanguage.json"
+            }
+        ]
+    }
 }

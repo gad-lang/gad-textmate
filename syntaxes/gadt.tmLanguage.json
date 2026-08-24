@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Gad Template",
+  "scopeName": "source.gadt",
+  "patterns": [
+    { "include": "#island" }
+  ],
+  "repository": {
+    "island": {
+      "comment": "A `{% … %}` code island or a `{%= … %}` output island (with optional `-`/`--` whitespace-trim markers). The body embeds the Gad grammar; everything outside an island is literal template text.",
+      "begin": "\\{%=?-{0,2}",
+      "beginCaptures": {
+        "0": { "name": "punctuation.section.embedded.begin.gadt" }
+      },
+      "end": "-{0,2}%\\}",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.embedded.end.gadt" }
+      },
+      "name": "meta.embedded.block.gad",
+      "patterns": [
+        { "include": "source.gad" }
+      ]
+    }
+  }
+}
