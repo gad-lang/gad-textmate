@@ -7,14 +7,14 @@
   ],
   "repository": {
     "island": {
-      "comment": "A `{% … %}` code island or a `{%= … %}` output island (with optional `-`/`--` whitespace-trim markers). The body embeds the Gad grammar; everything outside an island is literal template text.",
+      "comment": "A `{% … %}` code island or a `{%= … %}` output island (with optional `-`/`--` whitespace-trim markers). The body embeds the Gad grammar; everything outside an island is literal template text. The open/close markers carry a `keyword.control` scope so they get a strong, user-configurable color (IntelliJ maps it to the KEYWORD color key; the VS Code extension tints it via configurationDefaults).",
       "begin": "\\{%=?-{0,2}",
       "beginCaptures": {
-        "0": { "name": "punctuation.section.embedded.begin.gadt" }
+        "0": { "name": "keyword.control.template.begin.gadt" }
       },
       "end": "-{0,2}%\\}",
       "endCaptures": {
-        "0": { "name": "punctuation.section.embedded.end.gadt" }
+        "0": { "name": "keyword.control.template.end.gadt" }
       },
       "name": "meta.embedded.block.gad",
       "patterns": [
