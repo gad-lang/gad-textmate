@@ -23,14 +23,18 @@
         {
           "begin": "^\\s*/\\*\\*(?!/)",
           "end": "\\*\\*?/",
-          "name": "comment.block.documentation.gadx",
-          "contentName": "meta.embedded.block.markdown",
+          "name": "comment.documentation.block.gadx",
+          "contentName": "comment.documentation.block.markdown.gadx",
           "patterns": [{ "include": "text.html.markdown" }]
         },
         {
           "begin": "^\\s*/\\*",
           "end": "\\*/",
           "name": "comment.block.gadx"
+        },
+        {
+          "match": "^\\s*///(?!/).*$",
+          "name": "comment.documentation.line.gadx"
         },
         {
           "match": "^\\s*//.*$",

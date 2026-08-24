@@ -26,8 +26,8 @@
     "comments": {
       "patterns": [
         {
-          "name": "comment.block.documentation.gad",
-          "contentName": "meta.embedded.block.markdown",
+          "name": "comment.documentation.block.gad",
+          "contentName": "comment.documentation.block.markdown.gad",
           "begin": "/\\*\\*\\*",
           "end": "^\\s*\\*\\*\\*/\\s*$",
           "patterns": [
@@ -37,8 +37,8 @@
           ]
         },
         {
-          "name": "comment.block.documentation.gad",
-          "contentName": "meta.embedded.block.markdown",
+          "name": "comment.documentation.block.gad",
+          "contentName": "comment.documentation.block.markdown.gad",
           "begin": "/\\*\\*",
           "end": "^\\s*\\*\\*/\\s*$",
           "patterns": [
@@ -48,7 +48,7 @@
           ]
         },
         {
-          "name": "comment.line.documentation.gad",
+          "name": "comment.documentation.line.gad",
           "match": "///(?!/).*$"
         },
         {
