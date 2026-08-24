@@ -67,9 +67,9 @@
     "interpolation": {
       "comment": "A `{= expr }` / `{ … }` island. The body is marked `meta.embedded.gad` (via contentName) so editors — VS Code and the IntelliJ TextMate engine — re-highlight it as Gad code instead of tinting the whole region with the container's own color. The braces use `punctuation.section.embedded` so they are treated as embedded-section markers.",
       "begin": "\\{=?",
-      "beginCaptures": { "0": { "name": "punctuation.section.embedded.begin.gadx" } },
+      "beginCaptures": { "0": { "name": "keyword.control.interpolation.begin.gadx" } },
       "end": "\\}",
-      "endCaptures": { "0": { "name": "punctuation.section.embedded.end.gadx" } },
+      "endCaptures": { "0": { "name": "keyword.control.interpolation.end.gadx" } },
       "contentName": "meta.embedded.gad",
       "patterns": [{ "include": "source.gad" }]
     },
