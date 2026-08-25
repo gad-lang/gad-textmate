@@ -18,14 +18,31 @@
     { "include": "#tag" }
   ],
   "repository": {
+    "docmarkup": {
+      "comment": "Self-contained inline Markdown subset for doc-comment bodies: single-line match rules only (no begin/while, which break IntelliJ's TextMate engine when nested in the doc block). code first, then bold before italic; emphasis is word-boundary guarded so prose like a*b is not styled and the `**/` fence never matches.",
+      "patterns": [
+        { "name": "markup.inline.raw.string.gadx", "match": "`[^`\\n]+`" },
+        { "name": "markup.bold.gadx", "match": "\\*\\*(?=\\S)[^*\\n]+?(?<=\\S)\\*\\*" },
+        { "name": "markup.bold.gadx", "match": "(?<![\\w])__(?=\\S)[^_\\n]+?(?<=\\S)__(?![\\w])" },
+        { "name": "markup.italic.gadx", "match": "(?:^|(?<=[\\s(]))\\*(?=\\S)[^*\\n]+?(?<=\\S)\\*(?=[\\s).,;:!?]|$)" },
+        { "name": "markup.italic.gadx", "match": "(?<![\\w])_(?=\\S)[^_\\n]+?(?<=\\S)_(?![\\w])" },
+        { "name": "markup.heading.gadx", "match": "^\\s*#{1,6}\\s+.*$" },
+        {
+          "match": "(\\[)([^\\]\\n]+)(\\])(\\()([^)\\n]+)(\\))",
+          "captures": {
+            "2": { "name": "string.other.link.title.gadx" },
+            "5": { "name": "markup.underline.link.gadx" }
+          }
+        }
+      ]
+    },
     "comment": {
       "patterns": [
         {
           "begin": "^\\s*/\\*\\*(?!/)",
-          "end": "\\*\\*?/",
+          "end": "\\*\\*/\\s*$",
           "name": "comment.documentation.block.gadx",
-          "contentName": "comment.documentation.block.markdown.gadx",
-          "patterns": [{ "include": "text.html.markdown" }]
+          "patterns": [{ "include": "#docmarkup" }]
         },
         {
           "begin": "^\\s*/\\*",

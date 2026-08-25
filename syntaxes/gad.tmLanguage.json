@@ -27,23 +27,21 @@
       "patterns": [
         {
           "name": "comment.documentation.block.gad",
-          "contentName": "comment.documentation.block.markdown.gad",
           "begin": "/\\*\\*\\*",
-          "end": "^\\s*\\*\\*\\*/\\s*$",
+          "end": "\\*\\*\\*/\\s*$",
           "patterns": [
             {
-              "include": "text.html.markdown"
+              "include": "#docmarkup"
             }
           ]
         },
         {
           "name": "comment.documentation.block.gad",
-          "contentName": "comment.documentation.block.markdown.gad",
           "begin": "/\\*\\*",
-          "end": "^\\s*\\*\\*/\\s*$",
+          "end": "\\*\\*/\\s*$",
           "patterns": [
             {
-              "include": "text.html.markdown"
+              "include": "#docmarkup"
             }
           ]
         },
@@ -59,6 +57,45 @@
           "name": "comment.block.gad",
           "begin": "/\\*",
           "end": "\\*/"
+        }
+      ]
+    },
+    "docmarkup": {
+      "patterns": [
+        {
+          "name": "markup.inline.raw.string.gad",
+          "match": "`[^`\\n]+`"
+        },
+        {
+          "name": "markup.bold.gad",
+          "match": "\\*\\*(?=\\S)[^*\\n]+?(?\u003c=\\S)\\*\\*"
+        },
+        {
+          "name": "markup.bold.gad",
+          "match": "(?\u003c![\\w])__(?=\\S)[^_\\n]+?(?\u003c=\\S)__(?![\\w])"
+        },
+        {
+          "name": "markup.italic.gad",
+          "match": "(?:^|(?\u003c=[\\s(]))\\*(?=\\S)[^*\\n]+?(?\u003c=\\S)\\*(?=[\\s).,;:!?]|$)"
+        },
+        {
+          "name": "markup.italic.gad",
+          "match": "(?\u003c![\\w])_(?=\\S)[^_\\n]+?(?\u003c=\\S)_(?![\\w])"
+        },
+        {
+          "name": "markup.heading.gad",
+          "match": "^\\s*#{1,6}\\s+.*$"
+        },
+        {
+          "match": "(\\[)([^\\]\\n]+)(\\])(\\()([^)\\n]+)(\\))",
+          "captures": {
+            "2": {
+              "name": "string.other.link.title.gad"
+            },
+            "5": {
+              "name": "markup.underline.link.gad"
+            }
+          }
         }
       ]
     },
