@@ -82,13 +82,27 @@
       ]
     },
     "interpolation": {
-      "comment": "A `{= expr }` / `{ … }` island. The body is marked `meta.embedded.gad` (via contentName) so editors — VS Code and the IntelliJ TextMate engine — re-highlight it as Gad code instead of tinting the whole region with the container's own color. The braces use `punctuation.section.embedded` so they are treated as embedded-section markers.",
-      "begin": "\\{=?",
-      "beginCaptures": { "0": { "name": "keyword.control.interpolation.begin.gadx" } },
-      "end": "\\}",
-      "endCaptures": { "0": { "name": "keyword.control.interpolation.end.gadx" } },
-      "contentName": "meta.embedded.gad",
-      "patterns": [{ "include": "source.gad" }]
+      "comment": "An interpolation island. `{= expr }` OUTPUTS its value; a bare `{ expr }` is a CONTROL statement (runs, emits nothing). They get distinct begin scopes so an editor can colour output vs control differently. The body is marked `meta.embedded.gad` (via contentName) so editors re-highlight it as Gad code instead of tinting the whole region with the container's own colour.",
+      "patterns": [
+        {
+          "comment": "`{= … }` — an emitting (output) interpolation.",
+          "begin": "\\{=",
+          "beginCaptures": { "0": { "name": "keyword.control.interpolation.output.begin.gadx" } },
+          "end": "\\}",
+          "endCaptures": { "0": { "name": "keyword.control.interpolation.output.end.gadx" } },
+          "contentName": "meta.embedded.gad",
+          "patterns": [{ "include": "source.gad" }]
+        },
+        {
+          "comment": "`{ … }` — a control statement (no output).",
+          "begin": "\\{",
+          "beginCaptures": { "0": { "name": "keyword.control.interpolation.control.begin.gadx" } },
+          "end": "\\}",
+          "endCaptures": { "0": { "name": "keyword.control.interpolation.control.end.gadx" } },
+          "contentName": "meta.embedded.gad",
+          "patterns": [{ "include": "source.gad" }]
+        }
+      ]
     },
     "slot": {
       "begin": "^(\\s*)(@slot)(?=\\s+#?\")",
@@ -186,7 +200,8 @@
         { "include": "#interpolation" },
         { "include": "#attributes" },
         { "match": "\\.[A-Za-z0-9_-]+", "name": "entity.other.attribute-name.class.gadx" },
-        { "match": "#[A-Za-z0-9_-]+", "name": "entity.other.attribute-name.id.gadx" }
+        { "match": "#[A-Za-z0-9_-]+", "name": "entity.other.attribute-name.id.gadx" },
+        { "comment": "An inline `|` / `|>` right after the tag (`p |>`) opens a text block on the tag, like the own-line form.", "match": "(?<=\\s)\\|>?(?=\\s*$)", "name": "punctuation.definition.text.gadx" }
       ]
     },
     "attributes": {
