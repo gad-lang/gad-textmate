@@ -33,7 +33,14 @@ jobs:
             echo "tag v$tag != package.json version $pkg" >&2
             exit 1
           fi
+      # A pre-release version (one with a `-rc`/`-beta` suffix) publishes under the
+      # `next` dist-tag so it never moves `latest`.
       - name: Publish to npm
-        run: npm publish --access public --provenance
+        run: |
+          ver="$(node -p "require('./package.json').version")"
+          tag=latest
+          case "$ver" in *-*) tag=next ;; esac
+          echo "publishing $ver under dist-tag $tag"
+          npm publish --access public --provenance --tag "$tag"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
