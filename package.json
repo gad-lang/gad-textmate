@@ -1,6 +1,6 @@
 {
   "name": "@gad-lang/textmate",
-  "version": "0.1.0-rc.0",
+  "version": "0.1.0-rc.1",
   "description": "Gad language TextMate bundle: grammars (.gad / .gadt / .gadx), language configuration and config JSON schemas. Shared by the VS Code and IntelliJ plugins.",
   "publisher": "gad-lang",
   "license": "MIT",
