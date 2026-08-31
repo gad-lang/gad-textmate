@@ -139,7 +139,7 @@
         },
         {
           "name": "support.function.gad",
-          "match": "\\b(?:namedParamTypeCheck|iteratorInput|vmPushWriter|vmPopWriter|sortReverse|isSyncDict|implements|isCallable|isFunction|isIterable|isIterator|addMethod|enumerate|rawCaller|typeName|userData|isRawStr|contains|obstart|println|collect|isError|sprintf|toArray|isFloat|iterate|isArray|isBytes|repeat|filter|isBool|isChar|printf|typeof|isUint|values|isDict|reduce|isStr|Class|dcopy|items|chars|stdio|isInt|close|obend|flush|print|isNil|Mixin|write|copy|repr|sort|cast|each|read|wrap|keys|cap|len|map|is)\\b"
+          "match": "\\b(?:namedParamTypeCheck|iteratorInput|vmPushWriter|vmPopWriter|sortReverse|isIterator|isSyncDict|StaticType|implements|isCallable|isFunction|isIterable|addMethod|enumerate|rawCaller|typeName|userData|isRawStr|contains|obstart|println|collect|isError|sprintf|toArray|isFloat|iterate|isArray|isBytes|repeat|filter|isBool|isChar|printf|typeof|isUint|values|isDict|reduce|isStr|Mixin|dcopy|items|chars|stdio|isInt|close|obend|flush|print|isNil|Class|write|copy|repr|sort|cast|each|read|wrap|keys|cap|len|map|is)\\b"
         }
       ]
     },
