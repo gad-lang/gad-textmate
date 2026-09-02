@@ -127,7 +127,15 @@
       "patterns": [
         {
           "name": "keyword.control.gad",
-          "match": "\\b(?:deferb_err|defer_err|deferb_ok|interface|defer_ok|continue|finally|export|deferb|global|import|delete|return|class|const|break|defer|catch|match|mixin|param|embed|throw|enum|func|prop|else|meti|with|met|raw|for|ain|try|var|env|in|if)\\b"
+          "match": "\\b(?:deferb_err|defer_err|deferb_ok|continue|defer_ok|finally|delete|export|deferb|global|import|return|break|defer|catch|const|match|param|embed|throw|meti|else|prop|enum|func|with|ain|raw|met|env|try|var|for|in|if)\\b"
+        },
+        {
+          "name": "keyword.control.gad",
+          "match": "\\b(?:class|mixin)\\b(?=\\s*\\{|\\s+[A-Za-z_]\\w*\\s*\\{)"
+        },
+        {
+          "name": "keyword.control.gad",
+          "match": "\\binterface\\b(?=\\s*[\\{\\[]|\\s+[A-Za-z_]\\w*\\s*\\{)"
         },
         {
           "name": "constant.language.gad",
