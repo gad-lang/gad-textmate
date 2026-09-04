@@ -3,35 +3,89 @@
   "name": "Gadx",
   "scopeName": "source.gadx",
   "patterns": [
-    { "include": "#comment" },
-    { "include": "#doctype" },
-    { "include": "#codeblock" },
-    { "include": "#codeline" },
-    { "include": "#slot" },
-    { "include": "#test" },
-    { "include": "#keyword" },
-    { "include": "#call" },
-    { "include": "#component" },
-    { "include": "#pipe" },
-    { "include": "#html" },
-    { "include": "#interpolation" },
-    { "include": "#tag" }
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#doctype"
+    },
+    {
+      "include": "#codeblock"
+    },
+    {
+      "include": "#codeline"
+    },
+    {
+      "include": "#slot"
+    },
+    {
+      "include": "#test"
+    },
+    {
+      "include": "#rawtextblock"
+    },
+    {
+      "include": "#keyword"
+    },
+    {
+      "include": "#call"
+    },
+    {
+      "include": "#component"
+    },
+    {
+      "include": "#pipe"
+    },
+    {
+      "include": "#rawtexttag"
+    },
+    {
+      "include": "#html"
+    },
+    {
+      "include": "#interpolation"
+    },
+    {
+      "include": "#tag"
+    }
   ],
   "repository": {
     "docmarkup": {
       "comment": "Self-contained inline Markdown subset for doc-comment bodies: single-line match rules only (no begin/while, which break IntelliJ's TextMate engine when nested in the doc block). code first, then bold before italic; emphasis is word-boundary guarded so prose like a*b is not styled and the `**/` fence never matches.",
       "patterns": [
-        { "name": "markup.inline.raw.string.gadx", "match": "`[^`\\n]+`" },
-        { "name": "markup.bold.gadx", "match": "\\*\\*(?=\\S)[^*\\n]+?(?<=\\S)\\*\\*" },
-        { "name": "markup.bold.gadx", "match": "(?<![\\w])__(?=\\S)[^_\\n]+?(?<=\\S)__(?![\\w])" },
-        { "name": "markup.italic.gadx", "match": "(?:^|(?<=[\\s(]))\\*(?=\\S)[^*\\n]+?(?<=\\S)\\*(?=[\\s).,;:!?]|$)" },
-        { "name": "markup.italic.gadx", "match": "(?<![\\w])_(?=\\S)[^_\\n]+?(?<=\\S)_(?![\\w])" },
-        { "name": "markup.heading.gadx", "match": "^\\s*#{1,6}\\s+.*$" },
+        {
+          "name": "markup.inline.raw.string.gadx",
+          "match": "`[^`\\n]+`"
+        },
+        {
+          "name": "markup.bold.gadx",
+          "match": "\\*\\*(?=\\S)[^*\\n]+?(?<=\\S)\\*\\*"
+        },
+        {
+          "name": "markup.bold.gadx",
+          "match": "(?<![\\w])__(?=\\S)[^_\\n]+?(?<=\\S)__(?![\\w])"
+        },
+        {
+          "name": "markup.italic.gadx",
+          "match": "(?:^|(?<=[\\s(]))\\*(?=\\S)[^*\\n]+?(?<=\\S)\\*(?=[\\s).,;:!?]|$)"
+        },
+        {
+          "name": "markup.italic.gadx",
+          "match": "(?<![\\w])_(?=\\S)[^_\\n]+?(?<=\\S)_(?![\\w])"
+        },
+        {
+          "name": "markup.heading.gadx",
+          "match": "^\\s*#{1,6}\\s+.*$"
+        },
         {
           "match": "(\\[)([^\\]\\n]+)(\\])(\\()([^)\\n]+)(\\))",
           "captures": {
-            "2": { "name": "string.other.link.title.gadx" },
-            "5": { "name": "markup.underline.link.gadx" }
+            "2": {
+              "name": "string.other.link.title.gadx"
+            },
+            "5": {
+              "name": "markup.underline.link.gadx"
+            }
           }
         }
       ]
@@ -42,7 +96,11 @@
           "begin": "^\\s*/\\*\\*(?!/)",
           "end": "\\*\\*/\\s*$",
           "name": "comment.documentation.block.gadx",
-          "patterns": [{ "include": "#docmarkup" }]
+          "patterns": [
+            {
+              "include": "#docmarkup"
+            }
+          ]
         },
         {
           "begin": "^\\s*/\\*",
@@ -65,20 +123,40 @@
     },
     "codeblock": {
       "begin": "^\\s*(~~)\\s*$",
-      "beginCaptures": { "1": { "name": "punctuation.definition.codeblock.gadx" } },
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.codeblock.gadx"
+        }
+      },
       "end": "^\\s*(~~)\\s*$",
-      "endCaptures": { "1": { "name": "punctuation.definition.codeblock.gadx" } },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.codeblock.gadx"
+        }
+      },
       "name": "meta.embedded.block.gad",
-      "patterns": [{ "include": "source.gad" }]
+      "patterns": [
+        {
+          "include": "source.gad"
+        }
+      ]
     },
     "codeline": {
       "begin": "^(\\s*)(~)(?!~)",
-      "beginCaptures": { "2": { "name": "punctuation.definition.code.gadx" } },
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.code.gadx"
+        }
+      },
       "end": "$",
       "name": "meta.embedded.line.gad",
       "patterns": [
-        { "include": "#interpolation" },
-        { "include": "source.gad" }
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.gad"
+        }
       ]
     },
     "interpolation": {
@@ -87,131 +165,539 @@
         {
           "comment": "`{= … }` — an emitting (output) interpolation.",
           "begin": "\\{=",
-          "beginCaptures": { "0": { "name": "keyword.control.interpolation.output.begin.gadx" } },
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.control.interpolation.output.begin.gadx"
+            }
+          },
           "end": "\\}",
-          "endCaptures": { "0": { "name": "keyword.control.interpolation.output.end.gadx" } },
+          "endCaptures": {
+            "0": {
+              "name": "keyword.control.interpolation.output.end.gadx"
+            }
+          },
           "contentName": "meta.embedded.gad",
-          "patterns": [{ "include": "source.gad" }]
+          "patterns": [
+            {
+              "include": "source.gad"
+            }
+          ]
         },
         {
           "comment": "`{ … }` — a control statement (no output).",
           "begin": "\\{",
-          "beginCaptures": { "0": { "name": "keyword.control.interpolation.control.begin.gadx" } },
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.control.interpolation.control.begin.gadx"
+            }
+          },
           "end": "\\}",
-          "endCaptures": { "0": { "name": "keyword.control.interpolation.control.end.gadx" } },
+          "endCaptures": {
+            "0": {
+              "name": "keyword.control.interpolation.control.end.gadx"
+            }
+          },
           "contentName": "meta.embedded.gad",
-          "patterns": [{ "include": "source.gad" }]
+          "patterns": [
+            {
+              "include": "source.gad"
+            }
+          ]
         }
       ]
     },
     "slot": {
       "begin": "^(\\s*)(@slot)(?=\\s+#?\")",
-      "beginCaptures": { "2": { "name": "keyword.control.gadx" } },
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.control.gadx"
+        }
+      },
       "end": "$",
       "patterns": [
-        { "match": "#", "name": "punctuation.definition.slot.pass.gadx" },
-        { "include": "#slotname" },
-        { "include": "source.gad" }
+        {
+          "match": "#",
+          "name": "punctuation.definition.slot.pass.gadx"
+        },
+        {
+          "include": "#slotname"
+        },
+        {
+          "include": "source.gad"
+        }
       ]
     },
     "slotname": {
       "begin": "\"",
-      "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.gadx" } },
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.gadx"
+        }
+      },
       "end": "\"",
-      "endCaptures": { "0": { "name": "punctuation.definition.string.end.gadx" } },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.gadx"
+        }
+      },
       "patterns": [
-        { "include": "#interpolation" },
-        { "match": "[^{\"]+", "name": "string.quoted.double.gadx" }
+        {
+          "include": "#interpolation"
+        },
+        {
+          "match": "[^{\"]+",
+          "name": "string.quoted.double.gadx"
+        }
       ]
     },
     "test": {
       "begin": "^(\\s*)(@test)\\b",
-      "beginCaptures": { "2": { "name": "keyword.control.gadx" } },
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.control.gadx"
+        }
+      },
       "end": "$",
       "patterns": [
-        { "match": "\\b[A-Za-z_]\\w*", "name": "entity.name.function.gadx" },
+        {
+          "match": "\\b[A-Za-z_]\\w*",
+          "name": "entity.name.function.gadx"
+        },
         {
           "begin": "\"",
-          "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.gadx" } },
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.gadx"
+            }
+          },
           "end": "\"",
-          "endCaptures": { "0": { "name": "punctuation.definition.string.end.gadx" } },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.gadx"
+            }
+          },
           "name": "string.quoted.double.gadx"
         }
       ]
     },
     "keyword": {
       "begin": "^(\\s*)(@[A-Za-z_]\\w*)",
-      "beginCaptures": { "2": { "name": "keyword.control.gadx" } },
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.control.gadx"
+        }
+      },
       "end": "$",
       "patterns": [
-        { "include": "#interpolation" },
-        { "include": "source.gad" }
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.gad"
+        }
       ]
     },
     "call": {
       "begin": "^(\\s*)(!)(?=\\s)",
-      "beginCaptures": { "2": { "name": "keyword.operator.call.gadx" } },
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.operator.call.gadx"
+        }
+      },
       "end": "$",
       "name": "meta.embedded.line.gad",
       "patterns": [
-        { "include": "#interpolation" },
-        { "include": "source.gad" }
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.gad"
+        }
       ]
     },
     "component": {
       "begin": "^(\\s*)(\\+)\\s*([A-Za-z_][\\w.]*)?",
       "beginCaptures": {
-        "2": { "name": "keyword.operator.component.gadx" },
-        "3": { "name": "entity.name.function.gadx" }
+        "2": {
+          "name": "keyword.operator.component.gadx"
+        },
+        "3": {
+          "name": "entity.name.function.gadx"
+        }
       },
       "end": "$",
       "patterns": [
-        { "include": "#interpolation" },
-        { "include": "source.gad" }
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.gad"
+        }
       ]
     },
     "pipe": {
       "begin": "^(\\s*)(\\|>?)",
-      "beginCaptures": { "2": { "name": "punctuation.definition.text.gadx" } },
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.text.gadx"
+        }
+      },
       "end": "$",
       "name": "string.unquoted.text.gadx",
-      "patterns": [{ "include": "#interpolation" }]
+      "patterns": [
+        {
+          "include": "#interpolation"
+        }
+      ]
     },
     "html": {
       "begin": "^\\s*(?=<)",
       "end": "$",
       "name": "meta.tag.html.gadx",
       "patterns": [
-        { "include": "#interpolation" },
-        { "match": "</?", "name": "punctuation.definition.tag.gadx" },
-        { "match": ">", "name": "punctuation.definition.tag.gadx" },
-        { "match": "\\b([A-Za-z][\\w-]*)\\s*=", "captures": { "1": { "name": "entity.other.attribute-name.gadx" } } },
-        { "begin": "\"", "end": "\"", "name": "string.quoted.double.gadx" },
-        { "begin": "'", "end": "'", "name": "string.quoted.single.gadx" },
-        { "match": "\\b[A-Za-z][\\w-]*", "name": "entity.name.tag.gadx" }
+        {
+          "include": "#rawtexthtml"
+        },
+        {
+          "include": "#interpolation"
+        },
+        {
+          "match": "</?",
+          "name": "punctuation.definition.tag.gadx"
+        },
+        {
+          "match": ">",
+          "name": "punctuation.definition.tag.gadx"
+        },
+        {
+          "match": "\\b([A-Za-z][\\w-]*)\\s*=",
+          "captures": {
+            "1": {
+              "name": "entity.other.attribute-name.gadx"
+            }
+          }
+        },
+        {
+          "begin": "\"",
+          "end": "\"",
+          "name": "string.quoted.double.gadx"
+        },
+        {
+          "begin": "'",
+          "end": "'",
+          "name": "string.quoted.single.gadx"
+        },
+        {
+          "match": "\\b[A-Za-z][\\w-]*",
+          "name": "entity.name.tag.gadx"
+        }
       ]
     },
     "tag": {
       "begin": "^(\\s*)([A-Za-z][\\w-]*)?",
-      "beginCaptures": { "2": { "name": "entity.name.tag.gadx" } },
+      "beginCaptures": {
+        "2": {
+          "name": "entity.name.tag.gadx"
+        }
+      },
       "end": "$",
       "name": "meta.tag.gadx",
       "patterns": [
-        { "include": "#interpolation" },
-        { "include": "#attributes" },
-        { "match": "\\.[A-Za-z0-9_-]+", "name": "entity.other.attribute-name.class.gadx" },
-        { "match": "#[A-Za-z0-9_-]+", "name": "entity.other.attribute-name.id.gadx" },
-        { "comment": "An inline `|` / `|>` right after the tag (`p |>`) opens a text block on the tag, like the own-line form.", "match": "(?<=\\s)\\|>?(?=\\s*$)", "name": "punctuation.definition.text.gadx" }
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "#attributes"
+        },
+        {
+          "match": "\\.[A-Za-z0-9_-]+",
+          "name": "entity.other.attribute-name.class.gadx"
+        },
+        {
+          "match": "#[A-Za-z0-9_-]+",
+          "name": "entity.other.attribute-name.id.gadx"
+        },
+        {
+          "comment": "An inline `|` / `|>` right after the tag (`p |>`) opens a text block on the tag, like the own-line form.",
+          "match": "(?<=\\s)\\|>?(?=\\s*$)",
+          "name": "punctuation.definition.text.gadx"
+        }
       ]
     },
     "attributes": {
       "begin": "\\[",
-      "beginCaptures": { "0": { "name": "punctuation.definition.attributes.begin.gadx" } },
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.attributes.begin.gadx"
+        }
+      },
       "end": "\\]",
-      "endCaptures": { "0": { "name": "punctuation.definition.attributes.end.gadx" } },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.attributes.end.gadx"
+        }
+      },
       "name": "meta.attributes.gadx",
       "contentName": "meta.embedded.gad",
-      "patterns": [{ "include": "source.gad" }]
+      "patterns": [
+        {
+          "include": "source.gad"
+        }
+      ]
+    },
+    "rawinterp": {
+      "comment": "Interpolation inside raw text — a script, a stylesheet or an @raw_text block. `#{= … }#` outputs its value and `#{ … }#` is a control statement, the raw-text pair of `{= … }` / `{ … }`. The closing `}#` is what makes either unambiguous: a lone `}` belongs to the CSS or the JS. The body is marked `meta.embedded.gad` so editors re-highlight it as Gad code, the same as an ordinary interpolation.",
+      "patterns": [
+        {
+          "begin": "#\\{=",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.control.interpolation.output.begin.gadx"
+            }
+          },
+          "end": "\\}#",
+          "endCaptures": {
+            "0": {
+              "name": "keyword.control.interpolation.output.end.gadx"
+            }
+          },
+          "contentName": "meta.embedded.gad",
+          "patterns": [
+            {
+              "include": "source.gad"
+            }
+          ]
+        },
+        {
+          "begin": "#\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.control.interpolation.control.begin.gadx"
+            }
+          },
+          "end": "\\}#",
+          "endCaptures": {
+            "0": {
+              "name": "keyword.control.interpolation.control.end.gadx"
+            }
+          },
+          "contentName": "meta.embedded.gad",
+          "patterns": [
+            {
+              "include": "source.gad"
+            }
+          ]
+        }
+      ]
+    },
+    "rawtexttag": {
+      "patterns": [
+        {
+          "comment": "`script` written in tag syntax: its indented body is javascript, not markup. The block runs to the first line that is not indented past the tag itself, which is where the parser ends it too; a blank line keeps it open. What is on the tag's own line is still the tag's — attributes, shorthands — so it is highlighted as such.",
+          "begin": "^([ \\t]*)(script)\\b(?=[.#\\[(]|[ \\t]*$)(.*)$",
+          "beginCaptures": {
+            "2": {
+              "name": "entity.name.tag.gadx"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#attributes"
+                },
+                {
+                  "match": "\\.(?:[A-Za-z0-9_-]+|\"(?:[^\"\\\\]|\\\\.)*\")",
+                  "name": "entity.other.attribute-name.class.gadx"
+                },
+                {
+                  "match": "#(?:[A-Za-z0-9_-]+|\"(?:[^\"\\\\]|\\\\.)*\")",
+                  "name": "entity.other.attribute-name.id.gadx"
+                }
+              ]
+            }
+          },
+          "end": "^(?![ \\t]*$)(?!\\1[ \\t])",
+          "contentName": "meta.embedded.block.javascript.gadx",
+          "patterns": [
+            {
+              "include": "#rawinterp"
+            },
+            {
+              "include": "source.js"
+            }
+          ]
+        },
+        {
+          "comment": "`style` written in tag syntax: its indented body is css, not markup. The block runs to the first line that is not indented past the tag itself, which is where the parser ends it too; a blank line keeps it open. What is on the tag's own line is still the tag's — attributes, shorthands — so it is highlighted as such.",
+          "begin": "^([ \\t]*)(style)\\b(?=[.#\\[(]|[ \\t]*$)(.*)$",
+          "beginCaptures": {
+            "2": {
+              "name": "entity.name.tag.gadx"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#attributes"
+                },
+                {
+                  "match": "\\.(?:[A-Za-z0-9_-]+|\"(?:[^\"\\\\]|\\\\.)*\")",
+                  "name": "entity.other.attribute-name.class.gadx"
+                },
+                {
+                  "match": "#(?:[A-Za-z0-9_-]+|\"(?:[^\"\\\\]|\\\\.)*\")",
+                  "name": "entity.other.attribute-name.id.gadx"
+                }
+              ]
+            }
+          },
+          "end": "^(?![ \\t]*$)(?!\\1[ \\t])",
+          "contentName": "meta.embedded.block.css.gadx",
+          "patterns": [
+            {
+              "include": "#rawinterp"
+            },
+            {
+              "include": "source.css"
+            }
+          ]
+        }
+      ]
+    },
+    "rawtextblock": {
+      "comment": "`@raw_text` — a block read verbatim, by the same rules a script or a stylesheet is: braces are literal and `#{ … }#` is the interpolation.",
+      "begin": "^([ \\t]*)(@raw_text)\\b[ \\t]*$",
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.control.gadx"
+        }
+      },
+      "end": "^(?![ \\t]*$)(?!\\1[ \\t])",
+      "name": "meta.block.rawtext.gadx",
+      "contentName": "string.unquoted.rawtext.gadx",
+      "patterns": [
+        {
+          "include": "#rawinterp"
+        }
+      ]
+    },
+    "rawtexthtml": {
+      "patterns": [
+        {
+          "comment": "An inline `<script>` region: everything up to its close tag is javascript, so a `<` or a brace in there is content and not markup.",
+          "begin": "(<)(script)\\b([^>]*)(>)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.gadx"
+            },
+            "2": {
+              "name": "entity.name.tag.gadx"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "match": "\\b([A-Za-z][\\w-]*)\\s*=",
+                  "captures": {
+                    "1": {
+                      "name": "entity.other.attribute-name.gadx"
+                    }
+                  }
+                },
+                {
+                  "begin": "\"",
+                  "end": "\"",
+                  "name": "string.quoted.double.gadx"
+                },
+                {
+                  "begin": "'",
+                  "end": "'",
+                  "name": "string.quoted.single.gadx"
+                }
+              ]
+            },
+            "4": {
+              "name": "punctuation.definition.tag.gadx"
+            }
+          },
+          "end": "(</)(script)\\s*(>)",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.gadx"
+            },
+            "2": {
+              "name": "entity.name.tag.gadx"
+            },
+            "3": {
+              "name": "punctuation.definition.tag.gadx"
+            }
+          },
+          "contentName": "meta.embedded.block.javascript.gadx",
+          "patterns": [
+            {
+              "include": "#rawinterp"
+            },
+            {
+              "include": "source.js"
+            }
+          ]
+        },
+        {
+          "comment": "An inline `<style>` region: everything up to its close tag is css, so a `<` or a brace in there is content and not markup.",
+          "begin": "(<)(style)\\b([^>]*)(>)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.gadx"
+            },
+            "2": {
+              "name": "entity.name.tag.gadx"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "match": "\\b([A-Za-z][\\w-]*)\\s*=",
+                  "captures": {
+                    "1": {
+                      "name": "entity.other.attribute-name.gadx"
+                    }
+                  }
+                },
+                {
+                  "begin": "\"",
+                  "end": "\"",
+                  "name": "string.quoted.double.gadx"
+                },
+                {
+                  "begin": "'",
+                  "end": "'",
+                  "name": "string.quoted.single.gadx"
+                }
+              ]
+            },
+            "4": {
+              "name": "punctuation.definition.tag.gadx"
+            }
+          },
+          "end": "(</)(style)\\s*(>)",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.gadx"
+            },
+            "2": {
+              "name": "entity.name.tag.gadx"
+            },
+            "3": {
+              "name": "punctuation.definition.tag.gadx"
+            }
+          },
+          "contentName": "meta.embedded.block.css.gadx",
+          "patterns": [
+            {
+              "include": "#rawinterp"
+            },
+            {
+              "include": "source.css"
+            }
+          ]
+        }
+      ]
     }
   }
 }
