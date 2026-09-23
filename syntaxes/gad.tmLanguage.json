@@ -7,6 +7,9 @@
       "include": "#comments"
     },
     {
+      "include": "#metadata"
+    },
+    {
       "include": "#strings"
     },
     {
@@ -135,7 +138,11 @@
         },
         {
           "name": "keyword.control.gad",
-          "match": "\\binterface\\b(?=\\s*[\\{\\[]|\\s+[A-Za-z_]\\w*\\s*\\{)"
+          "match": "\\binterface\\b(?=\\s*[\\{\\[]|\\s+[A-Za-z_]\\w*\\s*[\\{\\[])"
+        },
+        {
+          "name": "keyword.control.gad",
+          "match": "\\btype\\b(?=\\s*[\u003c{]|\\s+[A-Za-z_]\\w*\\s*(?:[{\u003c]|\\[\\s*\\]))"
         },
         {
           "name": "constant.language.gad",
@@ -147,9 +154,55 @@
         },
         {
           "name": "support.function.gad",
-          "match": "\\b(?:namedParamTypeCheck|iteratorInput|vmPushWriter|vmPopWriter|sortReverse|isIterator|isSyncDict|StaticType|implements|isCallable|isFunction|isIterable|addMethod|enumerate|rawCaller|typeName|userData|isRawStr|contains|obstart|println|collect|isError|sprintf|toArray|isFloat|iterate|isArray|isBytes|repeat|filter|isBool|isChar|printf|typeof|isUint|values|isDict|reduce|isStr|Mixin|dcopy|items|chars|stdio|isInt|close|obend|flush|print|isNil|Class|write|copy|repr|sort|cast|each|read|wrap|keys|cap|len|map|is)\\b"
+          "match": "\\b(?:namedParamTypeCheck|TypedArrayType|iteratorInput|vmPushWriter|vmPopWriter|sortReverse|isIterator|isSyncDict|StaticType|implements|isCallable|isFunction|isIterable|addMethod|enumerate|rawCaller|typeName|userData|isRawStr|contains|obstart|println|collect|isError|sprintf|toArray|isFloat|iterate|isArray|isBytes|repeat|filter|isBool|isChar|printf|typeof|isUint|values|isDict|reduce|isStr|Class|dcopy|items|chars|stdio|isInt|close|obend|flush|print|isNil|Mixin|write|copy|repr|sort|cast|each|read|wrap|keys|cap|len|map|is)\\b"
         }
       ]
+    },
+    "metadata": {
+      "name": "meta.annotation.metadata.gad",
+      "begin": "^\\s*(\\[)(?=\\s*[A-Za-z_]\\w*\\s*(?:=(?!=)|,|\\]))",
+      "end": "\\]",
+      "patterns": [
+        {
+          "match": "(?:(?\u003c=\\[)|(?\u003c=,))\\s*([A-Za-z_]\\w*)(?=\\s*(?:=(?!=)|,|\\]))",
+          "captures": {
+            "1": {
+              "name": "entity.other.attribute-name.gad"
+            }
+          }
+        },
+        {
+          "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
+        },
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
+        },
+        {
+          "include": "$self"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.annotation.begin.gad"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.annotation.end.gad"
+        }
+      }
     },
     "numbers": {
       "patterns": [
