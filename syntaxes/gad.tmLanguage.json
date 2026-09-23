@@ -269,6 +269,36 @@
           ]
         },
         {
+          "name": "constant.other.symbol.delimited.gad",
+          "begin": "#\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "name": "constant.character.escape.gad",
+              "match": "\\\\\\)"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.symbol.begin.gad"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.symbol.end.gad"
+            }
+          }
+        },
+        {
+          "name": "constant.other.symbol.gad",
+          "match": "(#)(?!gad\\s?:)([A-Za-z_]\\w*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.symbol.gad"
+            }
+          }
+        },
+        {
           "name": "string.quoted.triple.gad",
           "begin": "\"\"\"",
           "end": "\"\"\""
